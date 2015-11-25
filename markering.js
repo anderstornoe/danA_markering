@@ -139,7 +139,9 @@ function check_answers() {
 
 
     if (korrekt == user_select) {
-        console.log("korrekt!")
+        
+         $(".dropout").off("click");
+
         $(".markering").eq(active_object).addClass("korrekt");
         //$(".dropout, .drop_out_header, .drop_spm").hide();
         $(".drop_feedback").html("<h3>Du har svaret <span class='label label-success'>Korrekt</span> </h3>''" + $(".markering").eq(active_object).html() + "'' er i kategorien " + $(".dropout").eq(user_select).html());
