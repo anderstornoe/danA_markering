@@ -48,7 +48,7 @@ function init() {
         $(".klasse_container").append('<div class="box_select"><div class = "box">' + JsonObj[0].kategorier[i] + '<span class="span_score">0/' + numberOfAnswers + '</span></div ></div>');
         $(".drop_left").append('<div class="dropout">' + JsonObj[0].kategorier[i] + '</div >');
     }
-    $(".tekst_container").append("<div class='brod_txt'>" + JsonObj[0].tekst + "</div>");
+    $(".tekst_container").append("<div class='brod_txt TextHolder'>" + JsonObj[0].tekst + "</div>");
     // load tesksten ind:
     $(".box").each(function(index) {
         $(this).css("background-color", colors[index]);
