@@ -2,20 +2,6 @@
         Forneden er der nogle justeringer der får boilerplaten til at ligne MAMs design.
 ******************************************************************************************************/
 
-h1 {
-    margin: 40px 0px;
-    line-height: 1em;
-}
-
-h2 {
-    margin: 30px 0px 20px 0px;
-    line-height: 1em;
-}
-
-h4 {
-    margin: 0px;
-    line-height: 1em;
-}
 
 .markering:hover {
     text-decoration: underline;
@@ -59,8 +45,9 @@ h4 {
     position: absolute;
 }
 
-.drop_right{
-    padding:20px;
+.drop_right {
+    /* padding: 20px; */
+    margin-top: -30px;
 }
 
 .dropout:hover {
@@ -74,14 +61,8 @@ h4 {
     margin-bottom: 20px;
 }
 
-.tekst_container {
-   /* overflow: auto;
-    border-radius: 8px;
-    padding: 20px;
-    height: 550px;
-    box-shadow: 1px 2px 10px #888888;
-    background-color: #fff;
-    margin-top: 20px;*/
+.TextHolder{
+    overflow: auto;
 }
 
 .dropout_container {
@@ -125,11 +106,4 @@ h4 {
     cursor: pointer;
     border-radius: 4px;
 }
-
-.blurry {
-    -webkit-filter: blur(5px);
-    -moz-filter: blur(5px);
-    -o-filter: blur(5px);
-    -ms-filter: blur(5px);
-    filter: blur(5px);
-}
+    

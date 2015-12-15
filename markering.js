@@ -1,4 +1,4 @@
-var colors = ["#ffff99", " #f2b9e1", " #b5f8d5", " #f7e5cc", " #d2d4ec", " #f6c0c0", " #acefed", " #e1241d2", " #acefed"];
+var colors = ["#ffff99", " #f2b9e1", " #b5f8d5", " #f7e5cc", " #d2d4ec", " #f6c0c0", " #acefed", "#e5c180"];
 
 
 var active_object = null;
@@ -7,6 +7,7 @@ var fejl = 0;
 var score_Array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var score = 0;
 var test_length = 3;
+var markering_length;
 
 var json_streng;
 
@@ -41,14 +42,20 @@ $(document).ready(function() {
 });
 
 function init() {
-    $(".instr_container").prepend("<h1>" + JsonObj[0].title + "</h1><h4>" + JsonObj[0].Instruktion + "</h4>")
+    $(".tekst_container").append("<div class='brod_txt TextHolder'>" + JsonObj[0].tekst + "</div>");
+    $(".instr_container").prepend("<h1>" + JsonObj[0].title + "</h1><h4 class='instruktion'><span class='glyphicon glyphicon-arrow-right'></span>" + JsonObj[0].Instruktion + "</h4>")
         // fyld knapperne op med den data der findes i json filen:
     for (var i = 0; i < JsonObj[0].kategorier.length; i++) {
         var numberOfAnswers = allIndexOf(json_streng, 'svar_' + i);
         $(".klasse_container").append('<div class="box_select"><div class = "box">' + JsonObj[0].kategorier[i] + '<span class="span_score">0/' + numberOfAnswers + '</span></div ></div>');
         $(".drop_left").append('<div class="dropout">' + JsonObj[0].kategorier[i] + '</div >');
     }
-    $(".tekst_container").append("<div class='brod_txt TextHolder'>" + JsonObj[0].tekst + "</div>");
+    markering_length = $(".markering").length;
+    $(".klasse_container").append('<div class="score_container"><span class="scoreText">Korrekte svar: </span><span class="QuestionCounter QuestionTask">0 ud af ' + markering_length + '</span> <span class="scoreText"> Fejl: </span><span class="ErrorCount QuestionTask">0</span>');
+
+    $(".tekst_container").append("<div class='kildeContainer'><b style='color:black'>KILDE:</b> " + JsonObj[0].kilde + "</div>"); 
+
+
     // load tesksten ind:
     $(".box").each(function(index) {
         $(this).css("background-color", colors[index]);
@@ -56,6 +63,7 @@ function init() {
     $(".dropout").each(function(index) {
         $(this).css("background-color", colors[index]);
     });
+
 };
 
 
@@ -105,6 +113,12 @@ function show_dropdown(posX, posY) {
 
 }
 
+
+
+
+
+
+
 function clicked_dropout(objekt) {
     var indeks = objekt.index();
     //console.log("clicked: " + indeks)
@@ -139,8 +153,10 @@ function check_answers() {
 
 
     if (korrekt == user_select) {
-        
-         $(".dropout").off("click");
+
+        $(".dropout").off("click");
+        $(".dropout").off("mouseenter mouseleave");
+
 
         $(".markering").eq(active_object).addClass("korrekt");
         //$(".dropout, .drop_out_header, .drop_spm").hide();
@@ -148,8 +164,12 @@ function check_answers() {
         new_score = score_Array[korrekt] + 1;
         score_Array.splice(korrekt, 1, new_score);
         score++;
-        $(".MsgBox_bgr").delay(2500).fadeOut(50, function() {
+     
+        $(".MsgBox_bgr").delay(1500).fadeOut(50, function() {
             $(this).remove();
+            if (score >= markering_length){
+                slutfeedback();
+            }
 
             $(".box").eq(user_select).animate({
                 opacity: ".3",
@@ -161,10 +181,14 @@ function check_answers() {
 
                 });
             });
+
+
         });
+        $(".QuestionCounter").html(score + " ud af " + markering_length);
 
 
     } else if (korrekt != user_select) {
+
         $(".drop_feedback").html("<h3>Du har svaret <span class='label label-danger'>Forkert</span> </h3>''" + $(".markering").eq(active_object).html() + "'' er ikke i kategorien " + $(".dropout").eq(user_select).html());
 
 
@@ -187,7 +211,7 @@ function check_answers() {
         $(this).html(string)
 
     });
-    $(".score").html("Rigtige: " + score + " / Fejl: " + fejl);
+    $(".ErrorCount").html(fejl);
 
 }
 
@@ -215,4 +239,12 @@ function loadData(url) {
 
 
     init();
+}
+
+function slutfeedback() {
+    console.log("SLut");
+    UserMsgBox("html", "<h4>Tillykke! Du har klassificeret alle " + markering_length + " ord i opgaven korrekt. Du havde " + fejl + " fejl.</h4><div class='btn btn-primary btn-again'>PRØV IGEN</div>");
+    $(".MsgBox_bgr").click(function() {
+        location.reload();
+    });
 }
