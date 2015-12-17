@@ -42,7 +42,7 @@ $(document).ready(function() {
 });
 
 function init() {
-    $(".tekst_container").append("<div class='brod_txt TextHolder'>" + JsonObj[0].tekst + "</div>");
+    $(".tekst_container").append("<div class='brod_txt textHolder'>" + JsonObj[0].tekst + "</div>");
     $(".instr_container").prepend("<h1>" + JsonObj[0].title + "</h1><h4 class='instruktion'><span class='glyphicon glyphicon-arrow-right'></span>" + JsonObj[0].Instruktion + "</h4>")
         // fyld knapperne op med den data der findes i json filen:
     for (var i = 0; i < JsonObj[0].kategorier.length; i++) {
@@ -88,7 +88,7 @@ function show_dropdown(posX, posY) {
     UserMsgBox("html", "");
 
     var active_sentence = $(".markering").eq(active_object).html();
-    var dp = "<div><div class='h3 drop_out_header'>Vælg kategori: </div>" + $(".dropout_container").html() + "<div class='drop_right col-xs-6'><h3 class='drop_spm'>''" + active_sentence + "''</h3><div class ='drop_feedback'></div></div>";
+    var dp = "<div><div class='h3 drop_out_header'>Vælg kategori for: </div>" + $(".dropout_container").html() + "<div class='drop_right col-xs-4 col-sm-6'><h3 class='drop_spm h3'>''" + active_sentence + "''</h3><div class ='drop_feedback'></div></div>";
     $("#UserMsgBox").append(dp);
     //$(".dropout_container").fadeIn(100); //.css("position", "absolute").css("left", posX).css("top", posY);
     //$(".drop_out_header").html("Vælg den rigtige kategori til: <br/><h3>" + $(".markering").eq(active_object).html() + "</h3>");
