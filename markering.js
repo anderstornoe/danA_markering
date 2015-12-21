@@ -88,7 +88,7 @@ function show_dropdown(posX, posY) {
     UserMsgBox("html", "");
 
     var active_sentence = $(".markering").eq(active_object).html();
-    var dp = "<div><div class='h3 drop_out_header'>Vælg kategori for: </div>" + $(".dropout_container").html() + "<div class='drop_right col-xs-4 col-sm-6'><h3 class='drop_spm h3'>''" + active_sentence + "''</h3><div class ='drop_feedback'></div></div>";
+    var dp = "<div class='drop_right col-xs-4 col-sm-6'><div class='h3 drop_out_header'>Vælg kategori for: </div><span class='h4 drop_spm'>&quot;" + active_sentence + "&quot;</span><div class ='drop_feedback'></div></div>" + $(".dropout_container").html() + "";
     $("#UserMsgBox").append(dp);
     //$(".dropout_container").fadeIn(100); //.css("position", "absolute").css("left", posX).css("top", posY);
     //$(".drop_out_header").html("Vælg den rigtige kategori til: <br/><h3>" + $(".markering").eq(active_object).html() + "</h3>");
@@ -103,6 +103,12 @@ function show_dropdown(posX, posY) {
         console.log(indeks)
         $(".drop_spm").css("background-color", colors[indeks]);
     });
+
+$(".dropout").mouseleave(function() {
+        $(".drop_spm").css("background-color", "transparent");
+    });
+    
+
     $(".MsgBox_bgr").off("click");
 
     $(".glyphicon-remove").click(function() {
@@ -165,7 +171,7 @@ function check_answers() {
         score_Array.splice(korrekt, 1, new_score);
         score++;
      
-        $(".MsgBox_bgr").delay(1500).fadeOut(50, function() {
+        $(".MsgBox_bgr").delay(2000).fadeOut(500, function() {
             $(this).remove();
             if (score >= markering_length){
                 slutfeedback();
@@ -177,7 +183,7 @@ function check_answers() {
                 $(".box").eq(user_select).animate({
                     opacity: "1",
 
-                }, 1000, "linear", function() {
+                }, 2500, "linear", function() {
 
                 });
             });

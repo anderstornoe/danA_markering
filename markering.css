@@ -2,9 +2,8 @@
         Forneden er der nogle justeringer der får boilerplaten til at ligne MAMs design.
 ******************************************************************************************************/
 
-
 .markering:hover {
-    text-decoration: underline;
+    background-color: #cececc;
 }
 
 .word {
@@ -23,7 +22,8 @@
     height: 4px;
 }
 
-.box, .dropout {
+.box,
+.dropout {
     /* height: 20px; */
     background: red;
     margin-right: 5px;
@@ -32,15 +32,14 @@
     padding: 2px 2px 2px 10px;
     margin-top: 2px;
 }
-.drop_out_header{
-    margin-left: 15px;
-}
 
-.drop_spm {
-    text-align: center;
-    margin-top: -2px;
+.drop_spm{
+        padding: 3px;
+    border-radius: 2px;
 }
-
+.drop_feedback{
+    margin-top:20px;
+}
 .span_score {
     color: black;
     /* margin-left: 50px; */
@@ -50,7 +49,6 @@
 
 .drop_right {
     /* padding: 20px; */
-    margin-top: -30px;
 }
 
 .dropout:hover {
@@ -104,14 +102,18 @@
 .markering {
     cursor: pointer;
     border-radius: 4px;
+    background-color: #e7e6e2;
 }
 
-
 #UserMsgBox {
-    padding: 20px 20px 10px 10px;
+    padding:20px 20px 20px 10px;
     width: 90%;
-    top: 5%; 
+    top: 5%;
     font-size: 16px;
     line-height: 1.3em;
 }
-    
+
+.MsgBox_bgr {
+    background-color: rgba(0,0,0,.15);
+}
+
