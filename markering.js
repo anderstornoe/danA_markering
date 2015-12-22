@@ -43,6 +43,7 @@ $(document).ready(function() {
 
 function init() {
     $(".tekst_container").append("<div class='brod_txt textHolder'>" + JsonObj[0].tekst + "</div>");
+    $(".textHolder").append("<div class='textHolder_gradient'></div>");
     $(".instr_container").prepend("<h1>" + JsonObj[0].title + "</h1><h4 class='instruktion'><span class='glyphicon glyphicon-arrow-right'></span>" + JsonObj[0].Instruktion + "</h4>")
         // fyld knapperne op med den data der findes i json filen:
     for (var i = 0; i < JsonObj[0].kategorier.length; i++) {
@@ -53,7 +54,7 @@ function init() {
     markering_length = $(".markering").length;
     $(".klasse_container").append('<div class="score_container"><span class="scoreText">Korrekte svar: </span><span class="QuestionCounter QuestionTask">0 ud af ' + markering_length + '</span> <span class="scoreText"> Fejl: </span><span class="ErrorCount QuestionTask">0</span>');
 
-    $(".tekst_container").append("<div class='kildeContainer'><b style='color:black'>KILDE:</b> " + JsonObj[0].kilde + "</div>"); 
+    $(".tekst_container").append("<div class='kildeContainer'><b style='color:black'>KILDE:</b> "+ JsonObj[0].kilde)+"</div>"; 
 
 
     // load tesksten ind:
@@ -88,7 +89,7 @@ function show_dropdown(posX, posY) {
     UserMsgBox("html", "");
 
     var active_sentence = $(".markering").eq(active_object).html();
-    var dp = "<div class='drop_right col-xs-4 col-sm-6'><div class='h3 drop_out_header'>Vælg kategori for: </div><span class='h4 drop_spm'>&quot;" + active_sentence + "&quot;</span><div class ='drop_feedback'></div></div>" + $(".dropout_container").html() + "";
+    var dp = "<div class='drop_right col-xs-6 col-sm-6'><div class='h3 drop_out_header'>Vælg kategori for: </div><span class='h4 drop_spm'>&quot;" + active_sentence + "&quot;</span><div class ='drop_feedback'></div></div>" + $(".dropout_container").html() + "";
     $("#UserMsgBox").append(dp);
     //$(".dropout_container").fadeIn(100); //.css("position", "absolute").css("left", posX).css("top", posY);
     //$(".drop_out_header").html("Vælg den rigtige kategori til: <br/><h3>" + $(".markering").eq(active_object).html() + "</h3>");
