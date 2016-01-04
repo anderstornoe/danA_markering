@@ -49,12 +49,13 @@ function init() {
     for (var i = 0; i < JsonObj[0].kategorier.length; i++) {
         var numberOfAnswers = allIndexOf(json_streng, 'svar_' + i);
         $(".klasse_container").append('<div class="box_select"><div class = "box">' + JsonObj[0].kategorier[i] + '<span class="span_score">0/' + numberOfAnswers + '</span></div ></div>');
+
         $(".drop_left").append('<div class="dropout">' + JsonObj[0].kategorier[i] + '</div >');
     }
     markering_length = $(".markering").length;
     $(".klasse_container").append('<div class="score_container"><span class="scoreText">Korrekte svar: </span><span class="QuestionCounter QuestionTask">0 ud af ' + markering_length + '</span> <span class="scoreText"> Fejl: </span><span class="ErrorCount QuestionTask">0</span>');
 
-    $(".tekst_container").append("<div class='kildeContainer'><b style='color:black'>KILDE:</b> "+ JsonObj[0].kilde)+"</div>"; 
+    $(".tekst_container").append("<div class='kildeContainer'><b style='color:black'>KILDE:</b> " + JsonObj[0].kilde) + "</div>";
 
 
     // load tesksten ind:
@@ -65,8 +66,16 @@ function init() {
         $(this).css("background-color", colors[index]);
     });
 
+    $(".box_select").click(function() {
+        clicked_forklaring($(this));
+    });
+
 };
 
+function clicked_forklaring(obj) {
+    var indeks = obj.index()-1;
+    UserMsgBox("html", "<h3>"+ JsonObj[0].kategorier[indeks] + "</h3><h4>"+JsonObj[0].forklaring[indeks] +"</h4>");
+}
 
 function clicked_word(clicked_object, pos) {
     //clicked_object.css("text-decoration", "underline");
@@ -105,10 +114,10 @@ function show_dropdown(posX, posY) {
         $(".drop_spm").css("background-color", colors[indeks]);
     });
 
-$(".dropout").mouseleave(function() {
+    $(".dropout").mouseleave(function() {
         $(".drop_spm").css("background-color", "transparent");
     });
-    
+
 
     $(".MsgBox_bgr").off("click");
 
@@ -171,10 +180,10 @@ function check_answers() {
         new_score = score_Array[korrekt] + 1;
         score_Array.splice(korrekt, 1, new_score);
         score++;
-     
+
         $(".MsgBox_bgr").delay(2000).fadeOut(500, function() {
             $(this).remove();
-            if (score >= markering_length){
+            if (score >= markering_length) {
                 slutfeedback();
             }
 
@@ -196,7 +205,7 @@ function check_answers() {
 
     } else if (korrekt != user_select) {
 
-        $(".drop_feedback").html("<h3>Du har svaret <span class='label label-danger'>Forkert</span> </h3>''" + $(".markering").eq(active_object).html() + "'' er ikke i kategorien " + $(".dropout").eq(user_select).html());
+        $(".drop_feedback").html("<h3>Du har svaret <span class='label label-danger'>Forkert</span> </h3><p>''" + $(".markering").eq(active_object).html() + "'' er ikke i kategorien " + $(".dropout").eq(user_select).html()+"</p>");
 
 
         $(".markering").eq(active_object).animate({
