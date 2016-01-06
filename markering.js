@@ -29,7 +29,7 @@ $(document).ready(function() {
 
     /*$(".brod_txt").click(function() {
         console.log("clicked brød")
-        UserMsgBox("html", "Du har klikket et sted, hvor der ikke umiddelbart er nogle ord, der siger noget om billedsprog");
+        UserMsgBox("body", "Du har klikket et sted, hvor der ikke umiddelbart er nogle ord, der siger noget om billedsprog");
         fejl++;
         check_answers();
     });*/
@@ -74,7 +74,7 @@ function init() {
 
 function clicked_forklaring(obj) {
     var indeks = obj.index()-1;
-    UserMsgBox("html", "<h3>"+ JsonObj[0].kategorier[indeks] + "</h3><h4>"+JsonObj[0].forklaring[indeks] +"</h4>");
+    UserMsgBox("body", "<h3>"+ JsonObj[0].kategorier[indeks] + "</h3><h4>"+JsonObj[0].forklaring[indeks] +"</h4>");
 }
 
 function clicked_word(clicked_object, pos) {
@@ -95,7 +95,7 @@ function clicked_word(clicked_object, pos) {
 
 
 function show_dropdown(posX, posY) {
-    UserMsgBox("html", "");
+    UserMsgBox("body", "");
 
     var active_sentence = $(".markering").eq(active_object).html();
     var dp = "<div class='drop_right col-xs-6 col-sm-6'><div class='h3 drop_out_header'>Vælg kategori for: </div><span class='h4 drop_spm'>&quot;" + active_sentence + "&quot;</span><div class ='drop_feedback'></div></div>" + $(".dropout_container").html() + "";
@@ -150,7 +150,7 @@ function hide_dropout() {
     $(".dropout_container").fadeOut(100);
 
     $(".brod_txt").click(function() {
-        UserMsgBox("html", "Der er ikke nogen vigtige ord her");
+        UserMsgBox("body", "Der er ikke nogen vigtige ord her");
     });
 
     $(".dropout").off("click");
@@ -259,7 +259,7 @@ function loadData(url) {
 
 function slutfeedback() {
     console.log("SLut");
-    UserMsgBox("html", "<h4>Tillykke! Du har klassificeret alle " + markering_length + " ord i opgaven korrekt. Du havde " + fejl + " fejl.</h4><div class='btn btn-primary btn-again'>PRØV IGEN</div>");
+    UserMsgBox("body", "<h4>Tillykke! Du har klassificeret alle " + markering_length + " ord i opgaven korrekt. Du havde " + fejl + " fejl.</h4><div class='btn btn-primary btn-again'>PRØV IGEN</div>");
     $(".MsgBox_bgr").click(function() {
         location.reload();
     });
