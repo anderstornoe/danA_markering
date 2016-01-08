@@ -15,7 +15,6 @@ $(document).ready(function() {
     $(".dropout_container").fadeOut(0);
 
 
-
     $(".markering").click(function(e) {
         active_object = $(this).parent().parent().find('span').index(this);
         $(".brod_txt").off("click");
