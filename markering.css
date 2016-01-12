@@ -111,6 +111,8 @@
     width: 90%;
     top: 5%;
     line-height: 1.3em;
+        max-height: 90%;
+    overflow: auto;
 }
 
 .MsgBox_bgr {

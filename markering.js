@@ -182,7 +182,7 @@ function check_answers() {
 
         $(".MsgBox_bgr").delay(2000).fadeOut(500, function() {
             $(this).remove();
-            if (score >= markering_length) {
+            if (score >0){//= markering_length) {
                 slutfeedback();
             }
 
@@ -258,8 +258,8 @@ function loadData(url) {
 
 function slutfeedback() {
     console.log("SLut");
-    UserMsgBox("body", "<h4>Tillykke! Du har klassificeret alle " + markering_length + " ord i opgaven korrekt. Du havde " + fejl + " fejl.</h4><div class='btn btn-primary btn-again'>PRØV IGEN</div>");
-    $(".MsgBox_bgr").click(function() {
+    UserMsgBox("body", JsonObj[0].slutfeedback +"</p><div class='btn btn-primary btn-again'>PRØV IGEN</div>");
+    $(".btn-again").click(function() {
         location.reload();
     });
 }
