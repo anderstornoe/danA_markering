@@ -182,7 +182,7 @@ function check_answers() {
 
         $(".MsgBox_bgr").delay(2000).fadeOut(500, function() {
             $(this).remove();
-            if (score > markering_length) {
+            if (score >= markering_length) {
                 slutfeedback();
             }
 
