@@ -208,9 +208,9 @@ function check_answers() {
 
 
         $(".markering").eq(active_object).animate({
-            backgroundColor: "#fff"
-        }, Math.random() * 3000, function() {
-            $(".markering").eq(active_object).removeAttr("value").css("background-color", "none");
+            backgroundColor: "#e7e6e2"
+        }, 200, function() {
+            $(".markering").eq(active_object).removeAttr("value").css("background-color", "e7e6e2");
         });
 
         fejl_i_svar = true;
@@ -257,9 +257,10 @@ function loadData(url) {
 }
 
 function slutfeedback() {
-    console.log("SLut");
     UserMsgBox("body", JsonObj[0].slutfeedback +"</p><div class='btn btn-primary btn-again'>PRØV IGEN</div>");
     $(".btn-again").click(function() {
         location.reload();
     });
+
+function snyd(){}
 }
