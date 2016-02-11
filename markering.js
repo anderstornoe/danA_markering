@@ -68,12 +68,14 @@ function init() {
     $(".box_select").click(function() {
         clicked_forklaring($(this));
     });
-
+    $(".btn_snyd").click(function() {
+        snyd();
+    });
 };
 
 function clicked_forklaring(obj) {
-    var indeks = obj.index()-1;
-    UserMsgBox("body", "<h3>"+ JsonObj[0].kategorier[indeks] + "</h3><h4>"+JsonObj[0].forklaring[indeks] +"</h4>");
+    var indeks = obj.index() - 1;
+    UserMsgBox("body", "<h3>" + JsonObj[0].kategorier[indeks] + "</h3><h4>" + JsonObj[0].forklaring[indeks] + "</h4>");
 }
 
 function clicked_word(clicked_object, pos) {
@@ -204,7 +206,7 @@ function check_answers() {
 
     } else if (korrekt != user_select) {
 
-        $(".drop_feedback").html("<h3>Du har svaret <span class='label label-danger'>Forkert</span> </h3><p>''" + $(".markering").eq(active_object).html() + "'' er ikke i kategorien " + $(".dropout").eq(user_select).html()+"</p>");
+        $(".drop_feedback").html("<h3>Du har svaret <span class='label label-danger'>Forkert</span> </h3><p>''" + $(".markering").eq(active_object).html() + "'' er ikke i kategorien " + $(".dropout").eq(user_select).html() + "</p>");
 
 
         $(".markering").eq(active_object).animate({
@@ -257,10 +259,17 @@ function loadData(url) {
 }
 
 function slutfeedback() {
-    UserMsgBox("body", JsonObj[0].slutfeedback +"</p><div class='btn btn-primary btn-again'>PRØV IGEN</div>");
+    UserMsgBox("body", JsonObj[0].slutfeedback + "</p><div class='btn btn-primary btn-again'>PRØV IGEN</div>");
     $(".btn-again").click(function() {
         location.reload();
     });
 
-function snyd(){}
+
+}
+
+function snyd() {
+
+    $(".markering").each(function(index) {
+       $(this).hide();
+    });
 }
