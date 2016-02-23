@@ -43,7 +43,8 @@ $(document).ready(function() {
 function init() {
     $(".tekst_container").append("<div class='brod_txt textHolder'>" + JsonObj[0].tekst + "</div>");
     $(".textHolder").append("<div class='textHolder_gradient'></div>");
-    $(".instr_container").prepend("<h1>" + JsonObj[0].title + "</h1><h4 class='instruktion'><span class='glyphicon glyphicon-arrow-right'></span>" + JsonObj[0].Instruktion + "</h4>")
+    // $(".instr_container").prepend("<h1>" + JsonObj[0].title + "</h1><h4 class='instruktion'><span class='glyphicon glyphicon-arrow-right'></span>" + JsonObj[0].Instruktion + "</h4>")
+    $(".instr_container").prepend("<h1>" + JsonObj[0].title + "</h1>" + instruction(JsonObj[0].Instruktion) );
         // fyld knapperne op med den data der findes i json filen:
     for (var i = 0; i < JsonObj[0].kategorier.length; i++) {
         var numberOfAnswers = allIndexOf(json_streng, 'svar_' + i);
