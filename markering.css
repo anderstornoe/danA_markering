@@ -44,9 +44,14 @@
 .span_score {
     color: black;
     /* margin-left: 50px; */
-    right: 10%;
+    right: 24px;
     position: absolute;
+    font-size: 12px;
+    color: #888;
+    margin-top: 5px;
 }
+
+
 
 .drop_right {
     /* padding: 20px; */
@@ -119,3 +124,12 @@
     background-color: rgba(0,0,0,.15);
 }
 
+.glyphicons-circle-info{
+    color:#888;
+    margin-right:10px;
+}
+
+
+.glyphicons-circle-info:hover{
+    color:white;
+}

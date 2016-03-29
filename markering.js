@@ -12,6 +12,9 @@ var markering_length;
 var json_streng;
 
 $(document).ready(function() {
+
+    enable_audio();
+
     $(".dropout_container").fadeOut(0);
 
 
@@ -44,16 +47,16 @@ function init() {
     $(".tekst_container").append("<div class='brod_txt textHolder'>" + JsonObj[0].tekst + "</div>");
     $(".textHolder").append("<div class='textHolder_gradient'></div>");
     // $(".instr_container").prepend("<h1>" + JsonObj[0].title + "</h1><h4 class='instruktion'><span class='glyphicon glyphicon-arrow-right'></span>" + JsonObj[0].Instruktion + "</h4>")
-    $(".instr_container").prepend("<h1>" + JsonObj[0].title + "</h1>" + instruction(JsonObj[0].Instruktion) );
-        // fyld knapperne op med den data der findes i json filen:
+    $(".instr_container").prepend("<h1>" + JsonObj[0].title + "</h1>" + instruction(JsonObj[0].Instruktion));
+    // fyld knapperne op med den data der findes i json filen:
     for (var i = 0; i < JsonObj[0].kategorier.length; i++) {
         var numberOfAnswers = allIndexOf(json_streng, 'svar_' + i);
-        $(".klasse_container").append('<div class="box_select"><div class = "box">' + JsonObj[0].kategorier[i] + '<span class="span_score">0/' + numberOfAnswers + '</span></div ></div>');
+        $(".klasse_container").append('<div class="box_select"><div class = "box">' + "<span class='glyphicons glyphicons-circle-info'></span>" + JsonObj[0].kategorier[i] + '<span class="span_score">0/' + numberOfAnswers + '</span></div ></div>');
 
         $(".drop_left").append('<div class="dropout">' + JsonObj[0].kategorier[i] + '</div >');
     }
     markering_length = $(".markering").length;
-    $(".klasse_container").append('<div class="score_container"><span class="scoreText">Korrekte svar: </span><span class="QuestionCounter QuestionTask">0 ud af ' + markering_length + '</span> <span class="scoreText"> Fejl: </span><span class="ErrorCount QuestionTask">0</span>');
+    $(".klasse_container").append('<div class="score_container"><span class="scoreText">Korrekte svar: </span><span class="QuestionCounter QuestionTask">0 ud af ' + markering_length + '</span> <span class="scoreText"> Forsøg: </span><span class="ErrorCount QuestionTask">0</span>');
 
     $(".tekst_container").append("<div class='kildeContainer'><b style='color:black'>KILDE:</b> " + JsonObj[0].kilde) + "</div>";
 
@@ -160,6 +163,8 @@ function hide_dropout() {
 }
 
 function check_answers() {
+     fejl++;
+
     //score_Array = [0, 0, 0, 0, 0, 0, 0, 0, 0];
     //score = 0;
 
@@ -172,8 +177,11 @@ function check_answers() {
 
     if (korrekt == user_select) {
 
+        correct_sound();
+
         $(".dropout").off("click");
         $(".dropout").off("mouseenter mouseleave");
+
 
 
         $(".markering").eq(active_object).addClass("korrekt");
@@ -183,19 +191,28 @@ function check_answers() {
         score_Array.splice(korrekt, 1, new_score);
         score++;
 
-        $(".MsgBox_bgr").delay(2000).fadeOut(500, function() {
+        $(".MsgBox_bgr").delay(1000).fadeOut(1000, function() {
             $(this).remove();
             if (score >= markering_length) {
                 slutfeedback();
             }
 
             $(".box").eq(user_select).animate({
-                opacity: ".3",
-            }, 50, "linear", function() {
+                opacity: "0",
+            }, 0, "linear", function() {
+                $(".span_score").each(function(index) {
+                    var string = $(this).text();
+                    string = score_Array[index] + string.substring(1, string.length);
+                    //console.log(string);
+
+                    //string.replace(0, score_Array[index]);
+                    $(this).html(string)
+
+                });
                 $(".box").eq(user_select).animate({
                     opacity: "1",
 
-                }, 2500, "linear", function() {
+                }, 500, "linear", function() {
 
                 });
             });
@@ -210,6 +227,8 @@ function check_answers() {
         $(".drop_feedback").html("<h3>Du har svaret <span class='label label-danger'>Forkert</span> </h3><p>''" + $(".markering").eq(active_object).html() + "'' er ikke i kategorien " + $(".dropout").eq(user_select).html() + "</p>");
 
 
+        error_sound();
+
         $(".markering").eq(active_object).animate({
             backgroundColor: "#e7e6e2"
         }, 200, function() {
@@ -217,18 +236,9 @@ function check_answers() {
         });
 
         fejl_i_svar = true;
-        fejl++;
-    }
+           }
     //console.log("korrekt: " + korrekt + ", svar: " + svar);
-    $(".span_score").each(function(index) {
-        var string = $(this).text();
-        string = score_Array[index] + string.substring(1, string.length);
-        //console.log(string);
 
-        //string.replace(0, score_Array[index]);
-        $(this).html(string)
-
-    });
     $(".ErrorCount").html(fejl);
 
 }
@@ -271,6 +281,6 @@ function slutfeedback() {
 function snyd() {
 
     $(".markering").each(function(index) {
-       $(this).hide();
+        $(this).hide();
     });
 }
