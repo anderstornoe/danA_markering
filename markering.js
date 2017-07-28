@@ -40,7 +40,7 @@ $(document).ready(function() {
     // $(".checkAnswer").click(check_answers);
 
     //init();
-
+microhint($(".brod_txt"), "Klik på de grå områder i teksten, og klassificér dem efter kategori.");
 });
 
 function init() {
